@@ -73,6 +73,41 @@ def load_backup_config_from_file(backup_filepath):
             'log_level': 'INFO' # Changed value
         }
 
+# --- BLOCK 2.5: Configuration Loading (Duplicated with minor changes) ---
+# This function is almost identical to load_config_from_file, simulating
+# loading from a backup source. SonarQube will likely flag this duplication.
+def load_backup_config_from_file2(backup_filepath):
+    """Loads backup configuration pretending to read from a file."""
+    logging.info(f"Attempting to load BACKUP configuration from {backup_filepath}...") # Minor change
+    try:
+        # Simulate I/O and parsing delay (identical)
+        time.sleep(0.05)
+        if not backup_filepath or not backup_filepath.endswith(".cfg.bak"): # Changed extension check
+            logging.error(f"Invalid backup config path: {backup_filepath}") # Minor change
+            raise ValueError("Invalid backup config file extension or path.") # Changed message slightly
+
+        # Simulate reading and parsing data (slightly different values)
+        config_data = {
+            'db_host': 'backup.db.internal', # Changed value
+            'db_port': 5433, # Changed value
+            'retries': 5, # Changed value
+            'timeout_ms': 7000, # Changed value
+            'feature_flags': ['new_ui'], # Changed value
+            'log_level': 'DEBUG' # Changed value
+        }
+        logging.info(f"Successfully loaded BACKUP configuration from {backup_filepath}.") # Minor change
+        return config_data
+    except Exception as e:
+        logging.error(f"Failed to load BACKUP config from {backup_filepath}: {e}") # Minor change
+        # Fallback configuration on error (also slightly different)
+        logging.warning("Using fallback backup configuration.") # Minor change
+        return {
+            'db_host': 'fallback-backup.db.internal', 'db_port': 5432, # Changed value
+            'retries': 1, 'timeout_ms': 2500, 'feature_flags': [], # Changed value
+            'log_level': 'INFO' # Changed value
+        }
+
+
 
 # --- BLOCK 3: Data Processing Function A ---
 # Simulates processing one type of data structure.
